@@ -27,4 +27,18 @@ public class Wallet {
     private boolean activeForWithdraw;
     private BigDecimal balance = BigDecimal.ZERO;
     private BigDecimal usableBalance = BigDecimal.ZERO;
+
+    @Override
+    public String toString() {
+        return "Wallet{" +
+                "id=" + id +
+                ", customer=" + customer +
+                ", walletName='" + walletName + '\'' +
+                ", currency='" + currency + '\'' +
+                ", activeForShopping=" + activeForShopping +
+                ", activeForWithdraw=" + activeForWithdraw +
+                ", balance=" + balance +
+                ", usableBalance=" + usableBalance +
+                '}';
+    }
 }

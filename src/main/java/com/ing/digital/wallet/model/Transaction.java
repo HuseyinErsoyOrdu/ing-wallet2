@@ -26,4 +26,17 @@ public class Transaction {
     private String oppositePartyType;
     private String oppositeParty;
     private String status;
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", wallet=" + wallet +
+                ", amount=" + amount +
+                ", type='" + type + '\'' +
+                ", oppositePartyType='" + oppositePartyType + '\'' +
+                ", oppositeParty='" + oppositeParty + '\'' +
+                ", status='" + status + '\'' +
+                '}';
+    }
 }

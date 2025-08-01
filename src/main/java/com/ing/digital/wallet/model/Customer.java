@@ -25,5 +25,17 @@ public class Customer {
     private String password;
     private String role; // CUSTOMER or EMPLOYEE
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", tckn='" + tckn + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
+    }
 }
 
