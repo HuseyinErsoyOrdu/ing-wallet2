@@ -121,7 +121,7 @@ public class WalletApiIntegrationTest {
         );
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(request.getUsername().toUpperCase(), response.getBody().getUsername());
+        assertEquals(request.getUsername().toUpperCase(), Objects.requireNonNull(response.getBody()).getUsername());
     }
 
     public void createWalltTest(String token) {
