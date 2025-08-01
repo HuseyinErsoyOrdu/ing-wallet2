@@ -1,6 +1,7 @@
 package com.ing.digital.wallet.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -11,9 +12,9 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WithdrawRequestDto {
-    @NotBlank(message = "Wallet Id is mandatory")
+    @NotNull(message = "Wallet Id is mandatory")
     private  Long walletId;
-    @NotBlank(message = "Amount is mandatory")
+    @NotNull(message = "Amount is mandatory")
     private BigDecimal amount;
     @NotBlank(message = "Destination is mandatory")
     private String destination;

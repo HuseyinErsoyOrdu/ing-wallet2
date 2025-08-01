@@ -1,6 +1,7 @@
 package com.ing.digital.wallet.dto;
 
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Data
@@ -9,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApprovalRequestDto {
-    @NotEmpty(message = "Transaction Id is mandatory")
+    @NotNull(message = "Transaction Id is mandatory")
     private  Long transactionId;
     @NotEmpty(message = "Status is mandatory")
     private String status;

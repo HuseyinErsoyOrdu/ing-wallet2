@@ -11,6 +11,7 @@ import com.ing.digital.wallet.service.CustomerService;
 import com.ing.digital.wallet.service.TransactionService;
 import com.ing.digital.wallet.service.WalletService;
 import com.ing.digital.wallet.util.AuthUtil;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
@@ -33,12 +34,13 @@ public class WalletController {
     private final AuthUtil authUtil;
     private final CustomerService customerService;
 
+    @Operation(summary = "Create a new wallet", description = "Customer create his own wallet, Employee has access for all")
     @PostMapping("/wallets/create")
     public ResponseEntity<Wallet> createWallet(@Valid @RequestBody CreateWalletRequestDto request) {
         Long customerId = request.getCustomerId();
         Customer customer = customerService.getCustomerById(customerId);
         if (!authUtil.isEmployee() && !authUtil.isSameUser(customer.getUsername())) {
-            throw new AccessDeniedException("Employees can get any customer, customers can only get themselves");
+            throw new AccessDeniedException("Employees can create any customer wallet, customers can create only their own wallets");
         }
         String name = request.getName();
         String currency = request.getCurrency();
@@ -47,6 +49,7 @@ public class WalletController {
         return ResponseEntity.ok(walletService.createWallet(customerId, name, currency, shop, withdraw));
     }
 
+    @Operation(summary = "List customer wallets", description = "Customer lists his own wallets, Employee has access for all")
     @GetMapping("/wallets/{customerId}")
     public ResponseEntity<List<Wallet>> getWallets(@PathVariable Long customerId) {
         Customer customer = customerService.getCustomerById(customerId);
@@ -56,6 +59,7 @@ public class WalletController {
         return ResponseEntity.ok(walletService.getWallets(customerId));
     }
 
+    @Operation(summary = "List customer wallets based on currency", description = "Customer lists his own wallets, Employee has access for all")
     @GetMapping("/wallets/{customerId}/currency/{currency}")
     public ResponseEntity<List<Wallet>> getWalletsByCustomerAndCurrency(@PathVariable Long customerId,
                                                                         @PathVariable String currency) {
@@ -66,6 +70,7 @@ public class WalletController {
         return ResponseEntity.ok(walletService.getWalletsByCustomerAndCurrency(customerId, currency));
     }
 
+    @Operation(summary = "List wallet transactions", description = "Customer lists his own wallet transactions, Employee has access for all")
     @GetMapping("/wallets/{walletId}/transactions")
     public ResponseEntity<List<Transaction>> listTransactions(@PathVariable Long walletId) {
         Wallet wallet = walletService.getWalletById(walletId);
@@ -77,6 +82,7 @@ public class WalletController {
         return ResponseEntity.ok(transactions);
     }
 
+    @Operation(summary = "Deposit on a wallet", description = "Customer deposits his own wallets, Employee has access for all")
     @PostMapping("/transactions/deposit")
     public ResponseEntity<Transaction> deposit(@Valid @RequestBody DepositRequestDto request) {
         Long walletId = request.getWalletId();
@@ -92,6 +98,7 @@ public class WalletController {
         return ResponseEntity.ok(tx);
     }
 
+    @Operation(summary = "Withdraw on a wallet", description = "Customer withdraws his own wallets, Employee has access for all")
     @PostMapping("/transactions/withdraw")
     public ResponseEntity<Transaction> withdraw(
             @Valid @RequestBody WithdrawRequestDto request) {
@@ -108,6 +115,7 @@ public class WalletController {
         return ResponseEntity.ok(transaction);
     }
 
+    @Operation(summary = "Approval on transaction", description = "Customer does approval on his own transactions, Employee has access for all")
     @PostMapping("/transactions/approve")
     public ResponseEntity<Transaction> approveTransaction(@Valid @RequestBody ApprovalRequestDto request) {
         Long transactionId = request.getTransactionId();

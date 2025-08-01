@@ -1,6 +1,7 @@
 package com.ing.digital.wallet.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @Data
@@ -9,7 +10,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateWalletRequestDto {
-    @NotBlank(message = "Customer Id is mandatory")
+    @NotNull(message = "Customer Id is mandatory")
     private Long customerId;
     @NotBlank(message = "Name is mandatory")
     private String name;

@@ -10,7 +10,7 @@ This is a Spring Boot RESTful API for managing digital wallets, deposits, withdr
 
 ## Technologies
 - Java 21
-- Spring Boot 4
+- Spring Boot 3
 - Spring Security 
 - Spring Data JPA
 - H2 in-memory database
