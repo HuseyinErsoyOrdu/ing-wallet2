@@ -2,6 +2,8 @@
 
 This is a Spring Boot RESTful API for managing digital wallets, deposits, withdrawals, and transaction approvals.
 
+The report file and the documentation exists in the directory "deployment".
+
 ## Features
 - Create and list wallets
 - Make deposits and withdrawals
